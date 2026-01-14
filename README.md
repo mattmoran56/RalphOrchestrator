@@ -2,6 +2,28 @@
 
 An autonomous AI agent loop that repeatedly calls Claude Code to work through tasks. Ralph gives Claude fresh context each iteration while persisting state in files, enabling long-running autonomous development sessions.
 
+## The Philosophy: Iteration Over Perfection
+
+Ralph implements a technique created by [Geoffrey Huntley](https://github.com/ghuntley) for autonomous software development. The original approach uses a deceptively simple mechanism:
+
+```bash
+while :; do cat PROMPT.md | claude ; done
+```
+
+This loop embodies a transformative principle: **repeated attempts succeed where single perfect attempts fail**. Rather than attempting flawless execution initially, the system persistently retries until achieving success.
+
+Geoffrey Huntley describes this philosophy as being "deterministically bad in an undeterministic world"—meaning the system accepts imperfection as a starting point, knowing that sustained iteration will eventually converge toward working solutions.
+
+## Why Fresh Context Matters
+
+With Ralph, it's crucial that each iteration starts with a **completely fresh context window**—not compacted or summarized context.
+
+**The Context Sweet Spot**: Claude performs best when context usage is between 0-50% of the total window. Above 50%, performance on complex tasks degrades significantly. By starting fresh each iteration, Ralph keeps Claude in this optimal zone.
+
+**The Power of Persistence**: When Ralph gets stuck on a problem, it logs what it tried to `progress.txt`. The next iteration reads this log with fresh eyes and full context capacity. It knows what approaches failed, giving it the knowledge to be novel and try new things—while having the cognitive headroom to actually execute on those ideas.
+
+This is the joy of Ralph: each iteration combines the **wisdom of past attempts** with the **full capability of fresh context**.
+
 ## How It Works
 
 Ralph is a bash script that:
