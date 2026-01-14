@@ -1,0 +1,28 @@
+{
+  "project": "Example Project",
+  "description": "A template PRD for Ralph orchestrator. Replace with your actual tasks.",
+  "stories": [
+    {
+      "id": 1,
+      "priority": 1,
+      "title": "Example Task 1",
+      "description": "This is an example task. Replace with your actual task description.",
+      "status": "pending",
+      "acceptance_criteria": [
+        "Criterion 1: What must be true when this is done",
+        "Criterion 2: Another requirement"
+      ]
+    },
+    {
+      "id": 2,
+      "priority": 2,
+      "title": "Example Task 2",
+      "description": "A second example task with lower priority.",
+      "status": "pending",
+      "acceptance_criteria": [
+        "This task demonstrates priority ordering",
+        "Task 1 will be completed before this one"
+      ]
+    }
+  ]
+}
