@@ -1,0 +1,4 @@
+# State files (these are per-repo, not part of the tool)
+prd.json
+progress.txt
+ralph.log
