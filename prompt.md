@@ -15,6 +15,19 @@ All state files are in the current directory:
 2. Read `prd.json` to see the current state of all tasks
 3. Identify the highest-priority incomplete task
 
+## One Task Per Iteration (CRITICAL)
+
+**Complete exactly ONE task per iteration, then end the session.**
+
+This is fundamental to the Ralph approach. Claude performs best when context usage is between 0-50%. By completing one task and exiting, each task gets fresh context and optimal performance.
+
+When you mark a task as "done":
+1. Update progress.txt with what you accomplished
+2. **Stop working immediately** - do NOT continue to the next task
+3. The orchestrator will start a fresh iteration for the next task
+
+If you try to do multiple tasks in one session, later tasks will suffer from degraded performance as context fills up. Trust the loop - it will call you again with fresh context.
+
 ## Task Selection
 
 1. Read `prd.json` to find all tasks
@@ -24,7 +37,7 @@ All state files are in the current directory:
 
 ## Your Workflow
 
-For each task:
+For your ONE task this iteration:
 
 1. **Read state**: Check prd.json and progress.txt for context
 2. **Select task**: Pick highest-priority incomplete task
@@ -34,6 +47,7 @@ For each task:
 6. **Test**: Run quality checks (lint, typecheck, tests - whatever the project requires)
 7. **Update status**: Set to "tested" if checks pass, then "done"
 8. **Log progress**: Append learnings to progress.txt
+9. **End session**: Stop working - do NOT pick up another task
 
 ## Commit Strategy
 
@@ -140,7 +154,9 @@ The orchestrator will detect the COMPLETE signal and stop the loop.
 ## Important Reminders
 
 - You have NO memory of previous sessions - always read the state files first
+- **ONE task per iteration** - stop after completing a task, do not continue to the next
 - Update progress.txt after each significant step, not just at the end
 - Be specific in progress.txt - vague notes don't help future iterations
 - The session may end at any time - keep your logs current
 - The next iteration will pick up from your last progress.txt entry
+- Trust the loop - fresh context for each task means better quality work
