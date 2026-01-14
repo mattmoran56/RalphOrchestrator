@@ -15,13 +15,20 @@ Each Claude session starts fresh with no memory of previous sessions. Claude rea
 
 ## Installation
 
-### 1. Make the script executable
+### 1. Clone the repository
 
 ```bash
-chmod +x ~/Documents/RalphOrchestrator/ralph.sh
+git clone https://github.com/mattmoran56/RalphOrchestrator.git
+cd RalphOrchestrator
 ```
 
-### 2. Add to your PATH
+### 2. Make the script executable
+
+```bash
+chmod +x ralph.sh
+```
+
+### 3. Add to your PATH
 
 Create a symlink in a directory that's in your PATH:
 
@@ -29,8 +36,8 @@ Create a symlink in a directory that's in your PATH:
 # Create ~/bin if it doesn't exist
 mkdir -p ~/bin
 
-# Create symlink
-ln -s ~/Documents/RalphOrchestrator/ralph.sh ~/bin/ralph
+# Create symlink (run from the cloned repo directory)
+ln -s "$(pwd)/ralph.sh" ~/bin/ralph
 ```
 
 If `~/bin` isn't in your PATH, add it to your shell config:
@@ -45,7 +52,7 @@ echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### 3. Install the PreCompact hook
+### 4. Install the PreCompact hook
 
 Copy the hook to your Claude settings:
 
@@ -53,8 +60,8 @@ Copy the hook to your Claude settings:
 # Create hooks directory
 mkdir -p ~/.claude/hooks
 
-# Copy the hook
-cp ~/Documents/RalphOrchestrator/hooks/no-auto-compact.sh ~/.claude/hooks/
+# Copy the hook (run from the cloned repo directory)
+cp hooks/no-auto-compact.sh ~/.claude/hooks/
 chmod +x ~/.claude/hooks/no-auto-compact.sh
 ```
 
@@ -169,16 +176,18 @@ When you first run Ralph, it creates `prd.json` from a template. Edit it to defi
 ## File Structure
 
 ```
-~/Documents/RalphOrchestrator/
-├── ralph.sh              # Main orchestrator script
-├── prompt.md             # Default prompt for Claude
-├── prd.template.json     # Template copied to new repos
-└── README.md             # This file
+RalphOrchestrator/           # This repo (install location)
+├── ralph.sh                 # Main orchestrator script
+├── prompt.md                # Default prompt for Claude
+├── prd.template.json        # Template copied to new repos
+├── hooks/
+│   └── no-auto-compact.sh   # PreCompact hook (copy to ~/.claude/hooks/)
+└── README.md                # This file
 
-~/.claude/
-├── settings.json         # Claude settings with hook config
+~/.claude/                   # Claude settings (after installation)
+├── settings.json            # Claude settings with hook config
 └── hooks/
-    └── no-auto-compact.sh  # PreCompact hook
+    └── no-auto-compact.sh   # PreCompact hook
 ```
 
 ## How the Code Works
@@ -231,7 +240,7 @@ Ralph stops when:
 ### Claude not picking up tasks
 
 - Ensure `prd.json` has tasks with status other than `"done"`
-- Check that the prompt is being loaded: `cat ~/Documents/RalphOrchestrator/prompt.md`
+- Check that the prompt is being loaded (ralph uses prompt.md from its install directory)
 
 ### Hook not working
 
