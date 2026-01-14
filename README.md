@@ -4,7 +4,7 @@ An autonomous AI agent loop that repeatedly calls Claude Code to work through ta
 
 ## The Philosophy: Iteration Over Perfection
 
-Ralph implements a technique created by [Geoffrey Huntley](https://github.com/ghuntley) for autonomous software development. The original approach uses a deceptively simple mechanism:
+Ralph implements a technique created by [Geoffrey Huntley](https://ghuntley.com/ralph/) for autonomous software development. The original approach uses a deceptively simple mechanism:
 
 ```bash
 while :; do cat PROMPT.md | claude ; done
